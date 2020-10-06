@@ -15,13 +15,14 @@
 # function SetupLoopDevice3() { echo $1 ; if losetup | grep /dev/loop$1; then echo "/dev/loop$1のディスクは研修用に準備済みです"; else dd if=/dev/zero of=/root/disk$1.img bs=1024 count=300000; losetup /dev/loop$1 /root/disk$1.img; echo "/dev/loop$1を再構築しました"; fi; }
 
 #function SetupLoopDevice() { if losetup | grep /dev/loop$1$ ; then echo "/dev/loop$1のディスクは研修用に準備済みです"; else dd if=/dev/zero of=/root/disk$1.img bs=1024 count=300000; losetup /dev/loop$1 /root/disk$1.img; echo "/dev/loop$1を再構築しました"; fi; }
+# function SetupLoopDevice() { if losetup | grep /dev/loop$1$ ; then echo "/dev/loop$1のディスクは研修用に準備済みです"; else dd if=/dev/zero of=/root/disk$1.img bs=1024 count=300000; losetup /dev/loop$1 /root/disk$1.img; echo "/dev/loop$1を再構築しました"; fi; if mount | grep /root/disk$1.img; then umount /dev/loop$1; losetup /dev/loop$1 /root/disk$1.img; fi; }
 
 
-# 次を/root/.bashrcに書く(GUI対応完成版)
-function SetupLoopDevice() { if losetup | grep /dev/loop$1$ ; then echo "/dev/loop$1のディスクは研修用に準備済みです"; else dd if=/dev/zero of=/root/disk$1.img bs=1024 count=300000; losetup /dev/loop$1 /root/disk$1.img; echo "/dev/loop$1を再構築しました"; fi; if mount | grep /root/disk$1.img; then umount /dev/loop$1; losetup /dev/loop$1 /root/disk$1.img; fi; }
+# 次を/root/.bashrcに書く
+function SetupDisk() { if ls "/root/vdisk$1" ; then echo "/dev/vdisk$1のディスクは研修用に準備済みです"; else dd if=/dev/zero of=/root/vdisk$1 bs=1024 count=300000; echo "/root/vdisk$1を再構築しました"; fi; }
 
 
 # 使い方
-SetupLoopDevice 1
+SetupDisk 1
 # ↑/root/disk1.imgに対応した/dev/loop1を作成する
 
