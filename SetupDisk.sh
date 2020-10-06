@@ -26,3 +26,15 @@ function SetupDisk() { if ls "/root/vdisk$1" ; then echo "/dev/vdisk$1のディ�
 SetupDisk 1
 # ↑/root/disk1.imgに対応した/dev/loop1を作成する
 
+
+
+# for zero linux
+SetupDisk 0
+
+if mount | grep /root/vdisk0
+then echo "";
+else mkfs.ext4 /root/vdisk0 << A
+y
+A
+mount /root/vdisk0 /mnt/mountdir
+fi
