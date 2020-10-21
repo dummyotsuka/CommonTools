@@ -24,7 +24,6 @@ function SetupDisk() { if ls "/root/vdisk$1" ; then echo "/dev/vdisk$1のディ�
 
 # 使い方
 SetupDisk 1
-# ↑/root/disk1.imgに対応した/dev/loop1を作成する
 
 
 
